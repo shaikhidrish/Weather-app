@@ -1,0 +1,528 @@
+@import "tailwindcss";
+/* --- CUSTOM WEATHER STYLES & ANIMATIONS --- */
+
+ @keyframes floatCloud {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(450vw); }
+}
+
+@keyframes floatCloudReverse {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-450vw); }
+}
+
+.animate-cloud-slow {
+  animation: floatCloud 45s linear infinite;
+}
+
+.animate-cloud-medium {
+  animation: floatCloud 30s linear infinite;
+}
+
+.animate-cloud-reverse {
+  animation: floatCloudReverse 50s linear infinite;
+}
+
+.animate-spin-slow {
+  animation: spin 20s linear infinite;
+} 
+
+/* Rain Drop Effect Simulation */
+.rain-effect {
+  background-image: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 100%);
+  background-size: 2px 150px;
+  animation: rainDrop 0.8s linear infinite;
+}
+
+@keyframes rainDrop {
+  0% { background-position: 0px 0px; }
+  100% { background-position: 20px 600px; }
+} 
+
+/* Custom Scrollbar for modern feel */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+} 
+/* --- APP WEATHER SPECIAL ANIMATIONS --- */
+
+/* 1. Rain Animation Layer */
+@keyframes rainEffect {
+  0% { background-position: 0px 0px; }
+  100% { background-position: 20px 400px; }
+}
+.animate-rain {
+  animation: rainEffect 0.3s linear infinite;
+} 
+
+/* 2. Cloud Move 1 Effect */
+@keyframes cloudMove1 {
+  0% { transform: translateX(-150%); }
+  100% { transform: translateX(250%); }
+}
+.animate-cloud-move-1 {
+  animation: cloudMove1 25s linear infinite;
+} 
+
+/* 3. Cloud Move 2 Effect */
+@keyframes cloudMove2 {
+  0% { transform: translateX(-200%); }
+  100% { transform: translateX(200%); }
+}
+.animate-cloud-move-2 {
+  animation: cloudMove2 40s linear infinite;
+}
+
+/* 4. Snow Falling Animations */
+@keyframes snowEffect {
+  0% { transform: translateY(-50px) translateX(0); opacity: 1; }
+  100% { transform: translateY(100vh) translateX(50px); opacity: 0; }
+}
+.animate-snow {
+  animation: snowEffect 6s linear infinite;
+}
+.animate-snow-slow {
+  animation: snowEffect 10s linear infinite;
+} 
+
+/* Custom Weather Animations */
+
+@keyframes rain {
+  0% { background-position: 0px 0px; }
+  100% { background-position: 20px 100vh; }
+}
+.animate-rain {
+  animation: rain 0.6s linear infinite;
+}
+
+@keyframes snow {
+  0% { transform: translateY(-10vh) translateX(-10px); opacity: 1; }
+  100% { transform: translateY(100vh) translateX(20px); opacity: 0; }
+}
+.animate-snow {
+  animation: snow 10s linear infinite;
+}
+.animate-snow-slow {
+  animation: snow 15s linear infinite;
+} 
+
+@keyframes cloud-move-1 {
+  0% { transform: translateX(-200px); }
+  100% { transform: translateX(100vw); }
+}
+.animate-cloud-move-1 {
+  animation: cloud-move-1 25s linear infinite;
+}
+
+@keyframes cloud-move-2 {
+  0% { transform: translateX(-300px); }
+  100% { transform: translateX(100vw); }
+} 
+.animate-cloud-move-2 {
+  animation: cloud-move-2 35s linear infinite;
+}
+
+/* ==================== WEATHER BACKGROUND ANIMATIONS ==================== */
+
+html,
+body,
+#root {
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+/* ==================== MOVING CLOUDS ==================== */
+
+.weather-clouds {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.moving-cloud {
+  position: absolute;
+  width: 230px;
+  height: 72px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.34);
+  filter: blur(1px);
+
+  box-shadow:
+    55px -28px 0 8px rgba(255, 255, 255, 0.30),
+    105px -10px 0 20px rgba(255, 255, 255, 0.26);
+
+  opacity: 0.72;
+}
+
+.moving-cloud::before,
+.moving-cloud::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  background: inherit;
+}
+
+.moving-cloud::before {
+  width: 88px;
+  height: 88px;
+  left: 48px;
+  top: -48px;
+}
+
+.moving-cloud::after {
+  width: 115px;
+  height: 115px;
+  left: 105px;
+  top: -68px;
+}
+
+/* Different cloud positions */
+
+.cloud-one {
+  top: 12%;
+  left: -30%;
+  animation: cloudMoveOne 34s linear infinite;
+}
+
+.cloud-two {
+  top: 29%;
+  left: -45%;
+  transform: scale(0.72);
+  animation: cloudMoveTwo 48s linear infinite;
+  animation-delay: -14s;
+}
+
+.cloud-three {
+  top: 53%;
+  left: -35%;
+  transform: scale(1.18);
+  opacity: 0.42;
+  animation: cloudMoveOne 58s linear infinite;
+  animation-delay: -30s;
+}
+
+.cloud-four {
+  top: 72%;
+  left: -55%;
+  transform: scale(0.58);
+  opacity: 0.35;
+  animation: cloudMoveTwo 42s linear infinite;
+  animation-delay: -21s;
+}
+
+.cloud-dark {
+  background: rgba(190, 205, 220, 0.22);
+
+  box-shadow:
+    55px -28px 0 8px rgba(180, 195, 210, 0.20),
+    105px -10px 0 20px rgba(170, 185, 200, 0.18);
+}
+
+@keyframes cloudMoveOne {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(155vw);
+  }
+}
+
+@keyframes cloudMoveTwo {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(185vw);
+  }
+}
+
+/* ==================== RAIN ==================== */
+
+.weather-rain {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.rain-drop {
+  position: absolute;
+  top: -12%;
+  width: 2px;
+  height: 70px;
+
+  border-radius: 999px;
+
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0),
+    rgba(205, 235, 255, 0.95)
+  );
+
+  transform: rotate(14deg);
+
+  animation-name: rainFall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes rainFall {
+  0% {
+    transform: translate3d(0, -15vh, 0) rotate(14deg);
+  }
+
+  100% {
+    transform: translate3d(-10vw, 125vh, 0) rotate(14deg);
+  }
+}
+
+/* ==================== RAIN MIST ==================== */
+
+.rain-mist {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      circle at 50% 20%,
+      rgba(180, 220, 255, 0.13),
+      transparent 42%
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(5, 15, 35, 0.08),
+      rgba(0, 10, 30, 0.35)
+    );
+
+  animation: mistPulse 4s ease-in-out infinite;
+}
+
+@keyframes mistPulse {
+  0%,
+  100% {
+    opacity: 0.7;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ==================== STORM GLOW ==================== */
+
+.storm-glow {
+  position: absolute;
+
+  width: 420px;
+  height: 420px;
+
+  right: -120px;
+  bottom: -180px;
+
+  border-radius: 50%;
+
+  background: rgba(0, 210, 255, 0.18);
+
+  filter: blur(70px);
+
+  animation: stormGlow 5s ease-in-out infinite;
+}
+
+@keyframes stormGlow {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(0.95);
+  }
+
+  50% {
+    opacity: 0.8;
+    transform: scale(1.08);
+  }
+}
+
+/* ==================== SNOW ==================== */
+
+.weather-snow {
+  position: absolute;
+  inset: 0;
+
+  overflow: hidden;
+  pointer-events: none;
+
+  z-index: 3;
+}
+
+.snow-flake {
+  position: absolute;
+  top: -10%;
+
+  color: rgba(255, 255, 255, 0.9);
+
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
+
+  animation-name: snowFall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes snowFall {
+  0% {
+    transform: translate3d(0, -10vh, 0);
+    opacity: 0;
+  }
+
+  15% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate3d(80px, 120vh, 0);
+    opacity: 0.1;
+  }
+}
+
+/* ==================== SUNNY WEATHER ==================== */
+
+.sun-orb {
+  position: absolute;
+
+  width: 180px;
+  height: 180px;
+
+  top: 8%;
+  right: 9%;
+
+  border-radius: 50%;
+
+  background: rgba(255, 238, 130, 0.9);
+
+  box-shadow:
+    0 0 70px 28px rgba(255, 211, 75, 0.32);
+
+  animation: sunFloat 5s ease-in-out infinite;
+
+  z-index: 2;
+}
+
+.sun-glow {
+  position: absolute;
+  inset: 0;
+
+  background:
+    radial-gradient(
+      circle at 82% 17%,
+      rgba(255, 230, 100, 0.32),
+      transparent 28%
+    );
+
+  z-index: 1;
+}
+
+@keyframes sunFloat {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+
+  50% {
+    transform: translateY(10px) scale(1.04);
+  }
+}
+
+/* ==================== GENERAL GLOW ==================== */
+
+.weather-glow {
+  position: absolute;
+
+  border-radius: 50%;
+
+  filter: blur(60px);
+
+  pointer-events: none;
+}
+
+.weather-glow-one {
+  width: 360px;
+  height: 360px;
+
+  top: -120px;
+  left: -100px;
+
+  background: rgba(255, 255, 255, 0.16);
+
+  animation: glowFloat 8s ease-in-out infinite;
+}
+
+.weather-glow-two {
+  width: 420px;
+  height: 420px;
+
+  right: -180px;
+  bottom: -160px;
+
+  background: rgba(0, 220, 255, 0.16);
+
+  animation: glowFloat 11s ease-in-out infinite reverse;
+}
+
+@keyframes glowFloat {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(30px, 20px, 0) scale(1.12);
+  }
+}
+
+/* ==================== CLOUDY WEATHER ==================== */
+
+.cloud-haze {
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(210, 225, 240, 0.05),
+      rgba(10, 30, 70, 0.28)
+    );
+
+  z-index: 2;
+
+  pointer-events: none;
+}
+
+/* ==================== REDUCE MOTION ==================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .moving-cloud,
+  .rain-drop,
+  .snow-flake,
+  .sun-orb,
+  .weather-glow,
+  .rain-mist,
+  .storm-glow {
+    animation: none !important;
+  }
+}
