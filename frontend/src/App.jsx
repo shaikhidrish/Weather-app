@@ -153,7 +153,7 @@ function HomePage() {
         async (position) => {
           const { latitude, longitude } = position.coords;
           try {
-            const res = await axios.get(`http://localhost:5000/api/weather?lat=${latitude}&lon=${longitude}`);
+            const res = await axios.get(`https://weather-app-t0db.onrender.com/api/weather?lat=${latitude}&lon=${longitude}`);
             setLocalWeather(res.data);
           } catch (err) {
             setError('Location ka live data nahi mil paya.');
@@ -269,10 +269,10 @@ function SearchPage() {
     setCurrentWeather(null);
 
     try {
-      const currentRes = await axios.get(`http://localhost:5000/api/weather?city=${city}`);
+      const currentRes = await axios.get(`https://weather-app-t0db.onrender.com/api/weather?city=${city}`);
       setCurrentWeather(currentRes.data);
 
-      const forecastRes = await axios.get(`http://localhost:5000/api/forecast?city=${city}`);
+      const forecastRes = await axios.get(`https://weather-app-t0db.onrender.com/api/forecast?city=${city}`);
       setForecast(forecastRes.data);
     } catch (err) {
       setError('City nahi mili, sahi naam check karein!');
